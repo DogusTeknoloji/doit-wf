@@ -1,0 +1,5 @@
+{{> (lookup child 'type') child }}
+
+const {{id}} = new Actions.EachAction(this);
+{{id}}.executionMode = EachExecutionMode.{{executionMode}};
+{{id}}.items = '{{itemsSource}}';

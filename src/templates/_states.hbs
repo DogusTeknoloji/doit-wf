@@ -1,0 +1,5 @@
+{{#each states}}
+{{> state }}
+{{/each}}
+this.states = [{{propertyNamesToStringArray states 'id' false}}];
+this.currentState = {{states.0.id}};

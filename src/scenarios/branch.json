@@ -1,0 +1,68 @@
+{
+    "id": "branchScenario",
+    "name": "Branch Scenario",
+    "version": "1",
+    "globalVariables": [],
+    "actorVariables": [],
+    "scenarioVariables": [
+        {
+            "name": "turnOnAllowed",
+            "type": "boolean",
+            "default": "false"
+        },
+        {
+            "name": "username",
+            "type": "string",
+            "default": "onsela"
+        }
+    ],
+    "triggers": [
+        {
+            "id": "turnOn",
+            "description": "Turn on",
+            "condition": "true",
+            "source": "start",
+            "target": "on"
+        },
+        {
+            "id": "turnOff",
+            "description": "Turn Off",
+            "condition": "true",
+            "source": "on",
+            "target": "off"
+        }
+    ],
+    "states": [
+        {
+            "id": "start",
+            "description": "Inital State"
+        },
+        {
+            "id": "off",
+            "description": "Off"
+        },
+        {
+            "id": "on",
+            "description": "On",
+            "entry": {
+                "id": "turnOnBranch",
+                "type": "branch",
+                "branches": [
+                    {
+                        "id": "turnOnBranch1",
+                        "condition": "this.turnOnAllowed == false",
+                        "action": {
+                            "id": "turnOnBranch1Action",
+                            "type": "code",
+                            "code": "console.log(this.username)"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": "unknown",
+            "description": "Unknown State"
+        }
+    ]
+}

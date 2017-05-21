@@ -1,0 +1,15 @@
+{{#if action}}
+{{> (lookup action 'type') action }}
+{{/if}}
+
+const {{id}} = new Core.Trigger('{{id}}', '{{description}}');
+{{id}}.condition = () => {{condition}};
+{{#if source}}
+{{id}}.source = {{source}};
+{{/if}}
+{{#if target}}
+{{id}}.target = {{target}};
+{{/if}}
+{{#if action}}
+{{id}}.action = {{action.id}};
+{{/if}}

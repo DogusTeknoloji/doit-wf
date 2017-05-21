@@ -1,0 +1,59 @@
+{
+  "id": "asyncScenario",
+  "name": "Async Scenario",
+  "version": "1",
+  "globalVariables": [],
+  "actorVariables": [],
+  "scenarioVariables": [
+    {
+      "name": "turnOnAllowed",
+      "type": "boolean",
+      "default": "false"
+    },
+    {
+      "name": "username",
+      "type": "string",
+      "default": "onsela"
+    }
+  ],
+  "triggers": [
+    {
+      "id": "turnOn",
+      "description": "Turn on",
+      "condition": "true",
+      "source": "start",
+      "target": "on"
+    },
+    {
+      "id": "turnOff",
+      "description": "Turn Off",
+      "condition": "true",
+      "source": "on",
+      "target": "off"
+    }
+  ],
+  "states": [
+    {
+      "id": "start",
+      "description": "Inital State"
+    },
+    {
+      "id": "on",
+      "description": "On",
+      "entry": {
+        "id": "startEntry",
+        "type": "async",
+        "scheduleType": "now",
+        "child": {
+          "id": "startEntryChildAction",
+          "type": "code",
+          "code": "console.log('Child action running.');"
+        }
+      }
+    },
+    {
+      "id": "off",
+      "description": "Off"
+    }
+  ]
+}

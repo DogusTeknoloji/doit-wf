@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "preLaunchTask": "build",
+            "sourceMaps": true,
+            "program": "${workspaceRoot}/src/bootstrap.ts",
+            "outFiles": [
+                "${workspaceRoot}/lib/**/*.js"
+            ],
+            "cwd": "${workspaceRoot}"
+        }
+    ]
+}

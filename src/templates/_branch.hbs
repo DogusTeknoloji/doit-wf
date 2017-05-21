@@ -1,0 +1,6 @@
+{{#each branches}}
+{{> branchItem }}
+{{/each}}
+
+const {{id}} = new Actions.BranchAction(this);
+{{id}}.branches = [{{propertyNamesToStringArray branches 'id' false}}];

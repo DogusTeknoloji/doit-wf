@@ -1,0 +1,13 @@
+{{#if entry}}
+{{> (lookup entry 'type') entry }}
+{{/if}}
+{{#if exit}}
+{{> (lookup exit 'type') exit }}
+{{/if}}
+const {{id}} = new Core.State('{{id}}', '{{description}}');
+{{#if entry}}
+{{id}}.entry = {{entry.id}};
+{{/if}}
+{{#if exit}}
+{{id}}.exit = {{exit.id}};
+{{/if}}

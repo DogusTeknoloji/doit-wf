@@ -1,0 +1,5 @@
+{{> (lookup child 'type') child }}
+
+const {{id}} = new Actions.AsyncAction(this);
+{{id}}.scheduleType = Actions.AsyncScheduleType.{{scheduleType}};
+{{id}}.child = {{child.id}};

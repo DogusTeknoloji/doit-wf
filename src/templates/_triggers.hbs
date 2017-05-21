@@ -1,0 +1,6 @@
+{{#each triggers}}
+{{> trigger }}
+{{/each}}
+
+this.triggerIds = [{{propertyNamesToStringArray triggers 'id' true}}];
+this.triggers = [{{propertyNamesToStringArray triggers 'id' false}}];

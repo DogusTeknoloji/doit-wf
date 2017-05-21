@@ -1,0 +1,8 @@
+{{#each children}}
+
+{{> (lookup . 'type') . }}
+
+{{/each}}
+
+const {{id}} = new Actions.SequenceAction(this);
+{{id}}.children = [{{propertyNamesToStringArray children 'id' false}}];
