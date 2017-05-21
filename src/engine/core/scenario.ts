@@ -28,9 +28,9 @@ export abstract class Scenario implements ScenarioConstructor {
     // TODO: Only instantiate if there's an output action in the flow
     outputs: Map<string, any> = new Map<string, any>();
 
-    protected globalVariableNames: Array<string> = [];
-    protected actorVariableNames: Array<string> = [];
-    protected scenarioVariableNames: Array<string> = [];
+    public globalVariableNames: Array<string> = [];
+    public actorVariableNames: Array<string> = [];
+    public scenarioVariableNames: Array<string> = [];
     protected states: Array<State>;
     protected triggers: Array<Trigger>;
 
@@ -114,7 +114,7 @@ export abstract class Scenario implements ScenarioConstructor {
     async loadVariables(): Promise<any> {
         await Promise.all(_.concat(
             this.globalVariableNames.map(async v => this[v] = await this.cacheService.get(v)),
-            this.actorVariableNames.map(async v => this[v] = await this.cacheService.get(v))
+            this.actorVariableNames.map(async v => this[v] = await this.cacheService.get(`${this.uniqueId}_${v}`))
         ));
     }
 }

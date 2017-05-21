@@ -1,4 +1,9 @@
-// Actor Variables
 {{#each actorVariables}}
-{{name}}: {{type}}{{defaultValue name type default}};
+private _{{name}}: {{type}};
+get {{name}}(): {{type}} {
+    return this._{{name}};
+}
+set {{name}}(value: {{type}}) {
+    this._{{name}} = value;
+}
 {{/each}}

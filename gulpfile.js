@@ -37,4 +37,4 @@ gulp.task('compile', function () {
     ]);
 });
 
-gulp.task('build', ['copy-templates', 'copy-scenarios']);
+gulp.task('build', ['copy-templates', 'copy-scenarios', 'compile']);

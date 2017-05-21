@@ -1,4 +1,9 @@
-// Scenario Variables
 {{#each scenarioVariables}}
-{{name}}: {{type}}{{defaultValue name type default}};
+private _{{name}}: {{type}}{{defaultValue name type default}};
+get {{name}}(): {{type}} {
+    return this._{{name}};
+}
+set {{name}}(value: {{type}}) {
+    this._{{name}} = value;
+}
 {{/each}}

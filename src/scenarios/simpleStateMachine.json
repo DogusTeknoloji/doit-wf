@@ -1,0 +1,70 @@
+{
+  "id": "simpleSM",
+  "name": "Simple State Machine",
+  "version": "1",
+  "globalVariables": [],
+  "actorVariables": [
+    { "name": "machineIsTurnedOn", "type": "boolean" }
+  ],
+  "scenarioVariables": [],
+  "triggers": [
+    {
+      "id": "turnOn",
+      "description": "Turn on",
+      "condition": "true",
+      "source": "start",
+      "target": "on",
+      "action": {
+        "id": "turnOnAssign",
+        "type": "assign",
+        "to": "machineIsTurnedOn",
+        "value": "true"
+      }
+    },
+    {
+      "id": "turnOff",
+      "description": "Turn Off",
+      "condition": "true",
+      "source": "on",
+      "target": "off"
+    }
+  ],
+  "states": [
+    {
+      "id": "start",
+      "description": "Inital State"
+    },
+    {
+      "id": "on",
+      "description": "On",
+      "entry": {
+        "id": "onBranch",
+        "type": "branch",
+        "branches": [
+          {
+            "id": "isTurnedOn",
+            "condition": "this.machineIsTurnedOn == true",
+            "action": {
+              "id": "isTurnedOnCode",
+              "type": "code",
+              "code": "console.log('Yes, it is turned on.');"
+            }
+          },
+          {
+            "id": "isTurnedOff",
+            "condition": "this.machineIsTurnedOn == false",
+            "action": {
+              "id": "isTurnedOffLog",
+              "type": "log",
+              "message": "The machine is turned off."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "off",
+      "description": "Off"
+    }
+  ]
+}
