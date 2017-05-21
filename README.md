@@ -58,7 +58,7 @@ State properties are:
 * **exit**: Any *Action* derived class. This action runs just after state becomes inactive.
 
 ### Sample scenario file:
-```json
+```js
 {
   "id": "simpleSM",
   "name": "Simple State Machine",
@@ -197,7 +197,7 @@ export class Scenario extends Core.Scenario {
 }
 ```
 To run this scenario, post data to **http://localhost/scenario/fire/turnOn**. The data needs to include a **uniqueId** field as each scenario is separated from the others based on this id. Here's a sample JSON you can use to trigger the scenario:
-```json
+```js
 {
   "uniqueId": "100",
   "machineIsTurnedOn": "true"
