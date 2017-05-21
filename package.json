@@ -2,10 +2,10 @@
   "name": "doit-wf",
   "version": "1.0.0",
   "description": "",
-  "main": "lib/index",
+  "main": "lib/bootstrap",
   "scripts": {
     "start": "npm run build:live",
-    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/**"
+    "build:live": "node lib/bootstrap"
   },
   "typings": "lib/index",
   "keywords": [],
@@ -23,7 +23,6 @@
     "@types/winston": "^2.3.2",
     "@types/handlebars": "^4.0.32",
     "@types/moment": "^2.13.0",
-    "nodemon": "^1.11.0",
     "ts-node": "^3.0.2",
     "typescript": "^2.2.2"
   },
