@@ -41,7 +41,7 @@ export class ScenarioHost {
             });
     }
 
-    fireTrigger(triggerId: string, uniqueId: string, inputs: Map<string, any>): Promise<any> {
+    fire(triggerId: string, uniqueId: string, inputs: Map<string, any>): Promise<any> {
         const key = `${triggerId}_${uniqueId}`;
 
         let instances = this.activeScenarios.get(key);

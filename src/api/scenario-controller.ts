@@ -34,9 +34,9 @@ export class ScenarioController {
   }
 
   @Post('/fire/:triggerId')
-  public fireTrigger(request: Request): Promise<any> {
+  public fire(request: Request): Promise<any> {
     const map = new Map<string, any>();
     _.each(_.keys(request.body), k => map.set(k, request.body[k]));
-    return this.scenarioHost.fireTrigger(request.params.triggerId, request.body.uniqueId, map);
+    return this.scenarioHost.fire(request.params.triggerId, request.body.uniqueId, map);
   }
 }
