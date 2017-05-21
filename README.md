@@ -7,7 +7,7 @@ Doit is a lightweight state machine engine running on Node JS and inspired by Wi
 Doit offers:
 - Simplicity. I tried to stay away from unnecessary abstractions as much as possible.
 - Redis backed persistence layer. It is possible to develop other persistence providers easily.
-- Redis backed caching layer. Again can be extended with other providers (MongoDB provider is in development).
+- Redis backed caching layer. This layer also can be extended with other providers (MongoDB provider is in development).
 - Code generation from JSON definition files with the help of Handlebars templates.
 
 ## Roadmap
