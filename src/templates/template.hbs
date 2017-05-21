@@ -2,12 +2,15 @@
 
 @Core.triggers('{{id}}', {{propertyNamesToStringArray triggers 'id' true}})
 export class Scenario extends Core.Scenario {
+    
     {{> globalVariables }}
     {{> actorVariables }}
     {{> scenarioVariables }}
     
     build() {
         this.id = '{{id}}';
+        this.globalVariableNames = [{{propertyNamesToStringArray globalVariables 'name' true}}];
+        this.actorVariableNames = [{{propertyNamesToStringArray actorVariables 'name' true}}];
         
         {{> states }}
         {{> triggers }}
