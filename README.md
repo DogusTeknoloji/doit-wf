@@ -16,6 +16,16 @@ Doit offers:
 * Scheduling actions. Doit has an Async activity that can be scheduled but this requires the workflow to stay in memory. So we need a better way to schedule the workflows.
 * Validation of the workflow while generating code.
 
+## Quick Start
+Clone this repository and run
+```bash
+$ npm install
+```
+You can start the project with:
+```bash
+$ npm run start
+```
+
 ## JSON scenario file format
 Doit generates scenario code files from simple JSON documents. Since we don't have a designer (yet) we need to create these documents by hand.
 
@@ -124,6 +134,8 @@ Scenario starts in the inital state and waits for any trigger to run. When **tur
 
 **on** state has an *entry* action defined, so as soon as the state becomes active, this action runs. The type of the action is *Branch* that works like a *switch* statement. *Branch* activity loops through the conditions of it's branches and runs the action of the first suitable branch. In this scenario first branch is a *Code* action, which simply runs the code specified. The second action is a *Log* action, which logs it's *message* property to the configured log target.
 
+To generate the scenario code, just post this JSON to **http://localhost:3000/scenario/build**
+
 And here's the generated scenario code based on the json file above:
 ```typescript
 import * as Core from '../engine/core';
@@ -184,3 +196,11 @@ export class Scenario extends Core.Scenario {
     }
 }
 ```
+To run this scenario, post data to **http://localhost/scenario/fire/turnOn**. The data needs to include a **uniqueId** field as each scenario is separated from the others based on this id. Here's a sample JSON you can use to trigger the scenario:
+```json
+{
+  "uniqueId": "100",
+  "machineIsTurnedOn": "true"
+}
+```
+All the active scenarios that has a trigger with the id **turnOn** will fire and an aggregated result will be returned from the engine.
