@@ -70,15 +70,15 @@ export class ScenarioHost {
         return results;
     }
 
-    suspendScenario(id: string): Promise<boolean> {
+    suspend(id: string): Promise<boolean> {
         return null;
     }
 
-    resumeScenario(id: string): Promise<boolean> {
+    resume(id: string): Promise<boolean> {
         return null;
     }
 
-    terminateScenario(id: string): Promise<boolean> {
+    terminate(id: string): Promise<boolean> {
         return null;
     }
 }
