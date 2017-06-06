@@ -10,11 +10,15 @@ import TYPES from '../../ioc/types';
 import fs = require('fs');
 import path = require('path');
 import * as _ from 'lodash';
+import * as config from 'config';
+import * as Configuration from '../../config';
 
 @injectable()
 export class ScenarioHost {
     private scenarioConstructors: Map<string, ScenarioConstructable> = new Map<string, ScenarioConstructable>();
     private activeScenarios: Map<string, Array<Scenario>> = new Map<string, Array<Scenario>>();
+
+    private engineConfig = config.get<Configuration.IEngineConfig>('Engine.host');
 
     constructor( @inject(TYPES.CacheService) public cacheService: ICacheService,
         @inject(TYPES.ScheduleService) public scheduleService: IScheduleService,
@@ -67,6 +71,7 @@ export class ScenarioHost {
                 output: result || []
             };
         }));
+
         return results;
     }
 

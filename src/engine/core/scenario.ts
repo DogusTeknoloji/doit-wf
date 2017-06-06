@@ -4,8 +4,6 @@ import TYPES from '../../ioc/types';
 import { State } from './state';
 import { Trigger } from './trigger';
 import * as _ from "lodash";
-import * as async from 'async';
-import "reflect-metadata";
 import { ICacheService } from './interfaces/cache-service';
 import { IScheduleService } from './interfaces/schedule-service';
 import { IPersistenceService } from './interfaces/persistence-service';
@@ -97,7 +95,7 @@ export abstract class Scenario implements ScenarioConstructor {
         return Promise.reject(`Invalid transition to ${trigger.target.description}`);
     }
 
-    generatePersistenceData() {
+    getPersistenceData() {
         return {
             state: this.currentState.id,
             scenarioVariables: this.scenarioVariableNames.map(n => ({ name: n, value: this[n] }))

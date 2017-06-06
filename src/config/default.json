@@ -1,0 +1,7 @@
+{
+    "Engine": {
+        "host": {
+            "automaticPersistence": true
+        }
+    }
+}

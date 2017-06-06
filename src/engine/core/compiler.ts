@@ -14,7 +14,6 @@ export class ScenarioCompiler {
                     return reject([error.message]);
                 }
 
-                const compiler = new ScenarioCompiler();
                 const diagnostics = this.compileFiles([fileName]);
 
                 if (diagnostics.length > 0) {
