@@ -26,10 +26,6 @@ export class ScenarioHost {
         @inject(TYPES.PersistenceService) public persistenceService: IPersistenceService,
         @inject(TYPES.ScenarioPool) public scenarioPool: ScenarioPool) { }
 
-    start() { }
-
-    stop() { }
-
     fire(triggerId: string, uniqueId: string, inputs: Map<string, any>): Promise<any> {
         return new Promise((resolve, reject) => {
             const scenarioIds = Metadata.triggerMappings.get(triggerId);
