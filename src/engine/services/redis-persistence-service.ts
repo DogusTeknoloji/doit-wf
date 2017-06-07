@@ -1,4 +1,4 @@
-import { IPersistenceService, Scenario } from '../core';
+import { IPersistenceService, Scenario, Variable, PersistenceData } from '../core';
 import { injectable } from 'inversify';
 import * as Redis from 'redis';
 
@@ -10,10 +10,9 @@ export class RedisPersistenceService implements IPersistenceService {
         this.client = Redis.createClient();
     }
 
-    save(scenario: Scenario): Promise<any> {
+    save(scenarioId: string, uniqueId: string, data: PersistenceData): Promise<void> {
         return new Promise<void>(async (resolve, reject) => {
-            const data = scenario.generatePersistenceData();
-            const key = `${scenario.id}_${scenario.uniqueId}`;
+            const key = `${scenarioId}_${uniqueId}`;
             this.client.set(key, JSON.stringify(data), (e, r) => {
                 if (e != null) {
                     reject(e.message);
@@ -23,8 +22,8 @@ export class RedisPersistenceService implements IPersistenceService {
         });
     }
 
-    load(scenarioId: string, uniqueId: string): Promise<any> {
-        return new Promise<void>(async (resolve, reject) => {
+    load(scenarioId: string, uniqueId: string): Promise<PersistenceData> {
+        return new Promise<PersistenceData>(async (resolve, reject) => {
             const key = `${scenarioId}_${uniqueId}`;
             this.client.get(key, (e, r) => {
                 if (e != null) {

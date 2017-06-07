@@ -1,15 +1,18 @@
-import { Container } from 'inversify';
-import { interfaces, Controller, InversifyExpressServer, TYPE } from 'inversify-express-utils';
 import "reflect-metadata";
+
 import * as bodyParser from 'body-parser';
-import TYPES from './types';
-import TAGS from './tags';
-import { ScenarioController } from '../api/scenario-controller';
-import { ICacheService, IScheduleService, IPersistenceService } from '../engine/core';
+
+import { Controller, InversifyExpressServer, TYPE, interfaces } from 'inversify-express-utils';
+import { ICacheService, IPersistenceService, IScheduleService } from '../engine/core';
+import { ScenarioHost, ScenarioPool } from '../engine/core';
+
+import { Container } from 'inversify';
 import { RedisCacheService } from '../engine/services/redis-cache-service';
-import { ScheduleService } from '../engine/services/schedule-service';
 import { RedisPersistenceService } from '../engine/services/redis-persistence-service';
-import { ScenarioHost } from '../engine/core';
+import { ScenarioController } from '../api/scenario-controller';
+import { ScheduleService } from '../engine/services/schedule-service';
+import TAGS from './tags';
+import TYPES from './types';
 
 let container = new Container();
 
@@ -17,6 +20,7 @@ let container = new Container();
 container.bind<interfaces.Controller>(TYPE.Controller).to(ScenarioController).whenTargetNamed(TAGS.ScenarioController);
 
 /* Engine */
+container.bind<ScenarioPool>(TYPES.ScenarioPool).to(ScenarioPool).inSingletonScope();
 container.bind<ScenarioHost>(TYPES.ScenarioHost).to(ScenarioHost).inSingletonScope();
 container.bind<ICacheService>(TYPES.CacheService).to(RedisCacheService).inSingletonScope();
 container.bind<IScheduleService>(TYPES.ScheduleService).to(ScheduleService).inSingletonScope();

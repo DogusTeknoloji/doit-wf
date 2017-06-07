@@ -1,7 +1,10 @@
 import 'reflect-metadata';
-import { Scenario } from './scenario';
-import { Log, LogType } from '../services/logger';
+
 import * as _ from "lodash";
+
+import { Log, LogType } from '../services/logger';
+
+import { Scenario } from './scenario';
 
 export const propertyMappings: Map<string, string[]> = new Map<string, string[]>();
 export const triggerMappings: Map<string, string[]> = new Map<string, string[]>();
@@ -25,15 +28,11 @@ export function property(target: any, key: string) {
 export function triggers(scenarioId: string, ...triggerNames: string[]) {
     return function (constructor: Function) {
         triggerNames.forEach(t => {
-            if (triggerMappings[t] == null) {
-                triggerMappings[t] = [];
+            if (triggerMappings.get(t) == null) {
+                triggerMappings.set(t, []);
             }
             Log.info(LogType.Engine, `Adding scenario for trigger ${t}`);
-            triggerMappings[t].push(scenarioId);
+            triggerMappings.get(t).push(scenarioId);
         });
     }
-}
-
-export function getScenarioIds(triggerId: string): string[] {
-    return triggerMappings[triggerId];
 }

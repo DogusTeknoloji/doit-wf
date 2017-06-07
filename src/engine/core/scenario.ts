@@ -1,12 +1,13 @@
+import * as _ from "lodash";
+
+import { ICacheService } from './interfaces/cache-service';
+import { IPersistenceService } from './interfaces/persistence-service';
+import { IScheduleService } from './interfaces/schedule-service';
+import { State } from './state';
+import TYPES from '../../ioc/types';
+import { Trigger } from './trigger';
 import container from '../../ioc/ioc';
 import { inject } from 'inversify';
-import TYPES from '../../ioc/types';
-import { State } from './state';
-import { Trigger } from './trigger';
-import * as _ from "lodash";
-import { ICacheService } from './interfaces/cache-service';
-import { IScheduleService } from './interfaces/schedule-service';
-import { IPersistenceService } from './interfaces/persistence-service';
 
 export interface ScenarioConstructor { }
 
@@ -26,16 +27,19 @@ export abstract class Scenario implements ScenarioConstructor {
     // TODO: Only instantiate if there's an output action in the flow
     outputs: Map<string, any> = new Map<string, any>();
 
-    public globalVariableNames: Array<string> = [];
-    public actorVariableNames: Array<string> = [];
-    public scenarioVariableNames: Array<string> = [];
+    globalVariableNames: Array<string> = [];
+    actorVariableNames: Array<string> = [];
+    scenarioVariableNames: Array<string> = [];
+    
     protected states: Array<State>;
     protected triggers: Array<Trigger>;
 
     constructor(public uniqueId: string,
         public cacheService: ICacheService, 
         public scheduleService: IScheduleService, 
-        public persistenceService: IPersistenceService) { }
+        public persistenceService: IPersistenceService) {
+            this.build();
+        }
 
     abstract build(): void;
 
@@ -97,13 +101,13 @@ export abstract class Scenario implements ScenarioConstructor {
 
     getPersistenceData() {
         return {
-            state: this.currentState.id,
-            scenarioVariables: this.scenarioVariableNames.map(n => ({ name: n, value: this[n] }))
+            currentState: this.currentState.id,
+            variables: this.scenarioVariableNames.map(n => ({ name: n, value: this[n] }))
         };
     }
 
     loadPersistenceData(data: any) {
-        _.each(data.scenarioVariables, v => {
+        _.each(data.variables, v => {
             this[v.name] = v.value;
         });
         this.currentState = _.find(this.states, s => s.id == data.state);

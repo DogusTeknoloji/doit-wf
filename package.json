@@ -27,6 +27,7 @@
     "typescript": "^2.2.2"
   },
   "dependencies": {
+    "async": "^2.4.1",
     "body-parser": "^1.17.1",
     "config": "^1.26.1",
     "express": "^4.15.2",

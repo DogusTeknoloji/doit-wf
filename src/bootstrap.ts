@@ -1,12 +1,9 @@
-import { InversifyExpressServer } from 'inversify-express-utils';
 import * as bodyParser from 'body-parser';
-import container from './ioc/ioc';
+
+import { InversifyExpressServer } from 'inversify-express-utils';
+import { ScenarioPool } from './engine/core';
 import TYPES from './ioc/types';
-import { ScenarioHost } from './engine/core';
-
-const scenarioHost = container.get<ScenarioHost>(TYPES.ScenarioHost);
-scenarioHost.start();
-
+import container from './ioc/ioc';
 
 let server = new InversifyExpressServer(container);
 
