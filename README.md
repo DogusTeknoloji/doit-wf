@@ -1,7 +1,5 @@
 # Doit State Machine
 
-**Doit is still in beta. All the features work but not yet tested throughly. Use at your own risk.**
-
 Doit is a lightweight state machine engine running on Node JS and inspired by Windows Workflow Foundation. It has the minimum set of action types ready and can be extended with more.
 
 Doit offers:
